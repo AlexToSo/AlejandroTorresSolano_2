@@ -1,0 +1,36 @@
+footer{
+    @include color-layout($colour-grey-bg);
+}
+
+.footer {
+    width: $mobile-block-width;
+    max-width: $mobile-block-max-width;
+    
+    margin: auto;
+    @include flex-column;
+    align-items: flex-start;
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    a {
+        color: $colour-white;
+    }
+
+    li {
+        @include flex-row;
+        align-items: center;
+        padding-right: 2rem;
+    }
+
+    @include desktop-only {
+        max-width: 100%;
+
+        ul {
+            width: 100%;
+            @include flex-row;
+            justify-content: space-around; 
+        }
+    }
+}

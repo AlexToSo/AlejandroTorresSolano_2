@@ -1,0 +1,114 @@
+@mixin round($radius: $border-radius) {
+    border-radius: $radius;
+}
+
+@mixin shadow($colour: $colour-grey, $offset: $shadow-size) {
+    box-shadow: 0 $offset 2rem $colour;
+}
+
+@mixin img-ratio {
+    overflow: hidden;
+    position: relative;
+    & img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+@mixin opacity-transition($time: $anim-duration) {
+    position: relative;
+    z-index: 1;
+    &:hover {
+        &::after {
+            opacity: 1;
+        }
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        z-index: -1;
+        transition: opacity $time;
+    }
+}
+
+@mixin btn {
+    margin: 5rem;
+    padding: 3rem;
+    @include round;
+    @include shadow(darken($colour-white, 50%));
+    color: $colour-white;
+    border: 0;
+    background: linear-gradient($colour-secondary, $colour-primary);
+    cursor: pointer;
+    @include opacity-transition;
+    &::after {
+        background: linear-gradient(lighten($colour-secondary, 10%), lighten($colour-primary, 10%));
+        @include round;
+        @include shadow(darken($colour-white, 90%));
+    }
+}
+
+@mixin list-item($colour: darken($colour-white, 5%)) {
+    @include flex-row;
+    align-items: center;
+    width: $mobile-block-width;
+    margin: 3rem;
+    padding: 3rem;
+    @include round;
+    @include shadow(darken($colour-white, 30%));
+    background-color: $colour;
+    i {
+        color: darken($colour,40%);
+    }
+    position: relative;
+    span {
+        position: absolute;
+        top: 30%;
+        left: -3rem;
+        background-color: $colour-primary;
+        color: $colour-white;
+        @include round;
+        padding: 0.4rem 1.8rem;
+        width: 5rem;
+        height: 5rem;
+        font-size: 3rem;
+    }
+}
+
+@mixin color-layout($colour: $colour-white) {
+    @if (lightness($colour) < 50%) {
+        color: $colour-white;
+    } @else {
+        color: $colour-black;
+    }
+    background-color: $colour;
+}
+
+@mixin ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin desktop-only {
+    @media screen and (min-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}

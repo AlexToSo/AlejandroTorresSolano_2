@@ -1,0 +1,14 @@
+.header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    @include shadow($colour-grey);
+
+    &__arrow {
+        position: absolute;
+        top: 25%;
+        left: 5rem;
+    }
+}
